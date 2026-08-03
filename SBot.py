@@ -1,8 +1,11 @@
 import discord, requests
-import argparse
+import os
+from dotenv import load_dotenv
 from discord.ext import commands
 from discord import app_commands
 from discord.utils import MISSING
+
+load_dotenv()
 
 class Client(commands.Bot):
     async def on_ready(self):
@@ -230,10 +233,7 @@ async def add(interaction: discord.Interaction, player_username: str):
                 embed.add_field(name=f'{i['players'][0]['username']}', value=f'ID: {i['players'][0]['id']}\nРанг: {i['rating']}', inline=False)
         await interaction.followup.send(embed=embed)
 
-parser = argparse.ArgumentParser(description="A simple CLI tool")
-parser.add_argument("token", type=str, help="Discord token")
 
-args = parser.parse_args()
+bot_token = os.getenv("SBOT_TOKEN")
 
-
-client.run(args.token)
+client.run(bot_token)
