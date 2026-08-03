@@ -279,11 +279,11 @@ async def add(interaction: discord.Interaction, player_username: str):
             url='https://www.youtube.com/@sahar_is_real',
             icon_url='https://yt3.googleusercontent.com/MeVCIqlkHHGMGvrJPuXJwTbxBldWdb9NK85V4apSg7y_IwgJYdNg-pgP2uCI3m8SW1j1MhTqn74=s160-c-k-c0x00ffffff-no-rj',
         )
-        for i in dataR['rankings']:
-            if i['players'][0]['username'].lower().startswith(player_username.lower()):
+        for ranking in dataR['rankings']:
+            for player in ranking['players']:
                 embed.add_field(
-                    name=f'{i["players"][0]["username"]}',
-                    value=f'ID: {i["players"][0]["id"]}\nРанг: {i["rating"]}',
+                    name=f'{player["username"]}',
+                    value=f'ID: {player["id"]}\nРанг: {ranking["rating"]}',
                     inline=False,
                 )
         await interaction.followup.send(embed=embed)
