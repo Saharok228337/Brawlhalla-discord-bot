@@ -32,4 +32,4 @@ line-length = 120
 quote-style = "single"
 
 [tool.ruff.lint]
-ignore = ["ASYNC210", "F811"]
+ignore = ["ASYNC210", "F811", "ASYNC210"]

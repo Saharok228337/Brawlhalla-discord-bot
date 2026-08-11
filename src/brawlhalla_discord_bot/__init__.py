@@ -45,17 +45,17 @@ async def add(interaction: discord.Interaction, brawlhalla_id: int):
     urlL = 'https://api.brawlhalla.com/v1/static/legends'
 
     query_params = {'brawlhalla_id': brawlhalla_id}
-    response = requests.get(url, params=query_params)
+    response = requests.get(url, params=query_params) # noqa: ASYNC210
 
     query_params1v1 = {'brawlhalla_id': brawlhalla_id, 'mode': 'ranked_1v1'}
-    response1v1 = requests.get(url, params=query_params1v1)
+    response1v1 = requests.get(url, params=query_params1v1) # noqa: ASYNC210
 
-    response2v2 = requests.get(url2v2, params=query_params)
+    response2v2 = requests.get(url2v2, params=query_params) # noqa: ASYNC210
 
     query_params3v3 = {'brawlhalla_id': brawlhalla_id, 'mode': 'ranked_3v3'}
-    response3v3 = requests.get(url, params=query_params3v3)
+    response3v3 = requests.get(url, params=query_params3v3) # noqa: ASYNC210
 
-    responseG = requests.get(urlG, params=query_params)
+    responseG = requests.get(urlG, params=query_params) # noqa: ASYNC210
 
     if response.status_code != 200:
         await interaction.followup.send(f'Щось пішло не так. Код помилки: {response.status_code}')
@@ -71,7 +71,7 @@ async def add(interaction: discord.Interaction, brawlhalla_id: int):
                 favourite = legend
 
         query_paramsL = {'filter_by_id': favourite['legend_id']}
-        responseL = requests.get(urlL, params=query_paramsL)
+        responseL = requests.get(urlL, params=query_paramsL) # noqa: ASYNC210
         dataL = responseL.json()
 
     if response1v1.status_code == 200:
@@ -85,7 +85,7 @@ async def add(interaction: discord.Interaction, brawlhalla_id: int):
                 best = legend
 
         query_paramsL1 = {'filter_by_id': best['legend_id']}
-        responseL1 = requests.get(urlL, params=query_paramsL1)
+        responseL1 = requests.get(urlL, params=query_paramsL1) # noqa: ASYNC210
         dataL1 = responseL1.json()
 
     if response2v2.status_code == 200:
@@ -201,15 +201,15 @@ async def add(interaction: discord.Interaction, brawlhalla_id: int):
 
 
 @client.tree.command(name='guild', description='Дізнайся статистику клана в бравлхалла', guild=GUILD_ID)
-async def add(interaction: discord.Interaction, guild_id: int):
+async def add(interaction: discord.Interaction, guild_id: int): # noqa: F811
     await interaction.response.defer()
 
     urlGl = 'https://api.brawlhalla.com/v1/guild/stats'
     urlGm = 'https://api.brawlhalla.com/v1/guild/members'
 
     query_paramsG = {'guild_id': guild_id}
-    responseGl = requests.get(urlGl, params=query_paramsG)
-    responseGm = requests.get(urlGm, params=query_paramsG)
+    responseGl = requests.get(urlGl, params=query_paramsG) # noqa: ASYNC210
+    responseGm = requests.get(urlGm, params=query_paramsG) # noqa: ASYNC210
 
     print(responseGl.status_code)
 
@@ -256,12 +256,12 @@ async def add(interaction: discord.Interaction, guild_id: int):
     description='Знайди ID гравця Brawlhalla за нікнеймом (якщо пройдено 10 placement matches)',
     guild=GUILD_ID,
 )
-async def add(interaction: discord.Interaction, player_username: str):
+async def add(interaction: discord.Interaction, player_username: str): # noqa: F811
     await interaction.response.defer()
 
     urlR = 'https://api.brawlhalla.com/v1/leaderboard/ranked'
     query_paramsR = {'game_mode': '1v1', 'region': 'ALL', 'search': player_username.lower()}
-    responseR = requests.get(urlR, params=query_paramsR)
+    responseR = requests.get(urlR, params=query_paramsR) # noqa: ASYNC210
 
     print(responseR.status_code)
 
